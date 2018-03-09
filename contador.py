@@ -28,7 +28,7 @@ def parse(received):
         resource = received.split()[1]
         return(method, resource)
     except:
-        return(None)
+        return('', '')
 
 # Process petition
 def process(request):
