@@ -9,17 +9,17 @@ SAT subject (Universidad Rey Juan Carlos)
 
 import socket
 
-NUMER = 0
+NUMBER = 0
 
 # Reverse counter
 def nextnumber():
     global NUMBER
     if NUMBER == 0:
         NUMBER = 5
-        return(NUMBER)
+        return(str(NUMBER))
     else:
         NUMBER = NUMBER -1
-        return(NUMBER)
+        return(str(NUMBER))
 
 # Parse petition
 def parse(received):
@@ -29,7 +29,7 @@ def parse(received):
 
 # Process petition
 def process(request):
-    if request[0] == 'GET'
+    if request[0] == 'GET':
         if request[1] == '/contador':
             return('200 OK',nextnumber())
         else:
@@ -62,10 +62,10 @@ try:
 
         received = str(recvSocket.recv(2048), 'utf-8')
         request = parse(received)
-        cod, answer = process(request)
+        code, answer = process(request)
 
         recvSocket.send(bytes(
-                        'HTTP/1.1 ' + code '\r\n\r\n' +
+                        'HTTP/1.1 ' + code + '\r\n\r\n' +
                         '<html><body><h1>Welcome to online reverse counter</h1>' +
                         answer +
                         '</body></html>' +
