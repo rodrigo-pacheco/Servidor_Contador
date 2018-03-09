@@ -23,9 +23,12 @@ def nextnumber():
 
 # Parse petition
 def parse(received):
-    method = received.split()[0]
-    resource = received.split()[1]
-    return(method, resource)
+    try:
+        method = received.split()[0]
+        resource = received.split()[1]
+        return(method, resource)
+    except:
+        return(None)
 
 # Process petition
 def process(request):
