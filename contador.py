@@ -33,10 +33,10 @@ def parse(received):
 
 # Process petition
 def process(request):
-    if request[0] == 'GET':
-        return('ES UN GET')
+    if request[0] == 'GET' and request[1] == '/contador':
+        return('Petición correcta')
     else:
-        return('NOOOOOOOOOOOOOOOO ES UN GET')
+        return('Petición INCORRECTA')
 
 try:
     while True:
