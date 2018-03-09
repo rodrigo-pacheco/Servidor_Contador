@@ -9,6 +9,18 @@ SAT subject (Universidad Rey Juan Carlos)
 
 import socket
 
+NUMER = 0
+
+# Reverse counter
+def nextnumber():
+    global NUMBER
+    if NUMBER == 0:
+        NUMBER = 5
+        return(NUMBER)
+    else:
+        NUMBER = NUMBER -1
+        return(NUMBER)
+
 # Parse petition
 def parse(received):
     method = received.split()[0]
@@ -19,7 +31,7 @@ def parse(received):
 def process(request):
     if request[0] == 'GET'
         if request[1] == '/contador':
-            return(nextnumber())
+            return('200 OK',nextnumber())
         else:
             return('404 Not Found' ,'Resource not found')
     else:
