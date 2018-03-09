@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Calculator HTTP Server: serves basic calculations
+Contador Server: serves inverse counter: 5,4,3,2,1,0,5
 
 Rodrigo Pacheco Martinez-Atienza
 r.pachecom @ gsyc.es
@@ -8,7 +8,6 @@ SAT subject (Universidad Rey Juan Carlos)
 """
 
 import socket
-import calculadora
 
 # Create a TCP objet socket and bind it to a port
 # Port should be 80, but since it needs root privileges,
@@ -26,6 +25,11 @@ mySocket.listen(5)
 # Accept connections, read incoming data, and answer back an HTML page
 #  (in an almost-infinite loop; the loop can be stopped with Ctrl+C)
 
+def parse(received):
+
+
+def process(request):
+
 try:
     while True:
         print('Waiting for connections')
@@ -33,16 +37,9 @@ try:
         print('Request received:')
         print('Answering back...')
 
-        try:
-            received = str(recvSocket.recv(2048), 'utf-8')
-            info = str(received.split()[1])
-            _, op1, operation, op2 = info.split("/")
-            param = [_, operation, int(op1), int(op2)] #First value left blanc due to calculadora specifications
-
-            answer = calculadora.calcula(param)
-        except:
-            answer = ("<p>Usage error: /number/operation/number.</p>"+
-                      "<p>Operations: suma, resta, multiplica, divide</p>")
+        received = str(recvSocket.recv(2048), 'utf-8')
+        request = parse(received)
+        answer = process(request)
 
         recvSocket.send(bytes(
                         "HTTP/1.1 200 OK\r\n\r\n" +
@@ -51,6 +48,7 @@ try:
                         "</body></html>" +
                         "\r\n", "utf-8"))
         recvSocket.close()
+        
 except KeyboardInterrupt:
     print("Closing binded socket")
     mySocket.close()
