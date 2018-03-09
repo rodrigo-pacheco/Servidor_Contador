@@ -25,10 +25,12 @@ mySocket.listen(5)
 # Accept connections, read incoming data, and answer back an HTML page
 #  (in an almost-infinite loop; the loop can be stopped with Ctrl+C)
 
+# Parse petition
 def parse(received):
-
-
-def process(request):
+    method = received.split()[0]
+    resource = received.split()[1]
+    return(method, resource)
+# def process(request):
 
 try:
     while True:
@@ -39,7 +41,10 @@ try:
 
         received = str(recvSocket.recv(2048), 'utf-8')
         request = parse(received)
-        answer = process(request)
+        # answer = process(request)
+        # print(received.split())
+        print(request)
+        answer='hola'
 
         recvSocket.send(bytes(
                         "HTTP/1.1 200 OK\r\n\r\n" +
@@ -48,7 +53,7 @@ try:
                         "</body></html>" +
                         "\r\n", "utf-8"))
         recvSocket.close()
-        
+
 except KeyboardInterrupt:
     print("Closing binded socket")
     mySocket.close()
