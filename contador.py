@@ -30,7 +30,13 @@ def parse(received):
     method = received.split()[0]
     resource = received.split()[1]
     return(method, resource)
-# def process(request):
+
+# Process petition
+def process(request):
+    if request[0] == 'GET':
+        return('ES UN GET')
+    else:
+        return('NOOOOOOOOOOOOOOOO ES UN GET')
 
 try:
     while True:
@@ -41,14 +47,11 @@ try:
 
         received = str(recvSocket.recv(2048), 'utf-8')
         request = parse(received)
-        # answer = process(request)
-        # print(received.split())
-        print(request)
-        answer='hola'
+        answer = process(request)
 
         recvSocket.send(bytes(
                         "HTTP/1.1 200 OK\r\n\r\n" +
-                        "<html><body><h1>Bienvenido a Calculadora Online</h1>" +
+                        "<html><body><h1>Welcome to online reverse counter</h1>" +
                         answer +
                         "</body></html>" +
                         "\r\n", "utf-8"))
