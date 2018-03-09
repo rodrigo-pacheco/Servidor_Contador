@@ -9,6 +9,22 @@ SAT subject (Universidad Rey Juan Carlos)
 
 import socket
 
+# Parse petition
+def parse(received):
+    method = received.split()[0]
+    resource = received.split()[1]
+    return(method, resource)
+
+# Process petition
+def process(request):
+    if request[0] == 'GET'
+        if request[1] == '/contador':
+            return(nextnumber())
+        else:
+            return('404 Not Found' ,'Resource not found')
+    else:
+        return('404 Not Found', 'Only answers to GET requests')
+
 # Create a TCP objet socket and bind it to a port
 # Port should be 80, but since it needs root privileges,
 # let's use one above 1024
@@ -25,19 +41,6 @@ mySocket.listen(5)
 # Accept connections, read incoming data, and answer back an HTML page
 #  (in an almost-infinite loop; the loop can be stopped with Ctrl+C)
 
-# Parse petition
-def parse(received):
-    method = received.split()[0]
-    resource = received.split()[1]
-    return(method, resource)
-
-# Process petition
-def process(request):
-    if request[0] == 'GET' and request[1] == '/contador':
-        return('Petición correcta')
-    else:
-        return('Petición INCORRECTA')
-
 try:
     while True:
         print('Waiting for connections')
@@ -47,14 +50,14 @@ try:
 
         received = str(recvSocket.recv(2048), 'utf-8')
         request = parse(received)
-        answer = process(request)
+        cod, answer = process(request)
 
         recvSocket.send(bytes(
-                        "HTTP/1.1 200 OK\r\n\r\n" +
-                        "<html><body><h1>Welcome to online reverse counter</h1>" +
+                        'HTTP/1.1 ' + code '\r\n\r\n' +
+                        '<html><body><h1>Welcome to online reverse counter</h1>' +
                         answer +
-                        "</body></html>" +
-                        "\r\n", "utf-8"))
+                        '</body></html>' +
+                        '\r\n', 'utf-8'))
         recvSocket.close()
 
 except KeyboardInterrupt:
