@@ -11,6 +11,7 @@ import socket
 
 NUMBER = 0
 
+
 # Reverse counter
 def nextnumber():
     global NUMBER
@@ -18,8 +19,9 @@ def nextnumber():
         NUMBER = 5
         return(str(NUMBER))
     else:
-        NUMBER = NUMBER -1
+        NUMBER = NUMBER - 1
         return(str(NUMBER))
+
 
 # Parse petition
 def parse(received):
@@ -30,13 +32,14 @@ def parse(received):
     except:
         return('', '')
 
+
 # Process petition
 def process(request):
     if request[0] == 'GET':
         if request[1] == '/contador':
-            return('200 OK',nextnumber())
+            return('200 OK', nextnumber())
         else:
-            return('404 Not Found' ,'Resource not found')
+            return('404 Not Found', 'Resource not found')
     else:
         return('404 Not Found', 'Only answers to GET requests')
 
